@@ -41,7 +41,8 @@ artp-dl.exe link1 link2 link3 ...
 ```
 
 O programa faz download de 3 videos em simultâneo e pode-se especificar
-qualquer quantidade de links para se fazer download.
+qualquer quantidade de links para se fazer download. O programa trata de fazer
+o download de todos os videos automaticamente.
 
 Os videos vão para a pasta de onde o código for executado e terão o formato
 `.ts`.
@@ -68,7 +69,7 @@ artp-dl.exe link1 link2 link3 ...
 ```
 
 The program downloads 3 videos in parallel and you can specify any amount of
-links to download.
+links to download. The program will handle all the links automatically.
 
 The videos downloaded will go to the current working directory on the `.ts`
 format.
