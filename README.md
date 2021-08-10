@@ -60,7 +60,8 @@ cargo build --release
 
 ### How to run
 
-The executable is called `artp-dl`. And to download videos you just have to run:
+The executable is called `artp-dl`. And to download videos you just have to
+run:
 
 ```powershell
 artp-dl.exe link1 link2 link3 ...
