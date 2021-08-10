@@ -1,6 +1,6 @@
 # Arquivos RTP downloader
 
-A program to download videos from (RTP Arquivos)[https://arquivos.rtp.pt/].
+A program to download videos from [RTP Arquivos](https://arquivos.rtp.pt/).
 
 ## How to build
 
