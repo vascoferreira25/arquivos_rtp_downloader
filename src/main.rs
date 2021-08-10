@@ -1,15 +1,7 @@
-// States for the elemtns
-// use iced::button;
-// The elements to use
-// use iced::{Button, Column, Container, Element, Row, Text};
-// Styling options
-// use iced::{Align, HorizontalAlignment, Length};
-// The application settings
-// use iced::{executor, Application, Command, Settings};
-
-// Use a channel to keep data between threads
 use std::fs::File;
 use std::io::prelude::*;
+
+// Use a channel to keep data between threads
 use std::sync::mpsc;
 
 use regex::Regex;
@@ -27,10 +19,10 @@ struct Video {
 }
 
 impl Video {
-    async fn new(url: &str) -> Video {
+    async fn new(url: String) -> Video {
         let re_video_info = Regex::new(r#"(<meta property="og:title" content="(?P<video_title>.*)"/>)[\n\d\w\W]*(file: '(?P<video_link>https://streaming-arquivo-ondemand.rtp.pt.*)(?P<video_index>index.*streams=)(?P<video_id>.*)(?P<video_format>\.mp4))"#).unwrap();
 
-        let resp = reqwest::get(url).await.unwrap();
+        let resp = reqwest::get(&url).await.unwrap();
         let resp_body = resp.text().await.unwrap();
 
         // Get the video name
@@ -67,7 +59,7 @@ impl Video {
         format!("{}{}-{}.ts", self.link, self.id, part)
     }
 
-    async fn fetch_video_info(url: &str, tx: mpsc::Sender<Video>) {
+    async fn fetch_video_info(url: String, tx: mpsc::Sender<Video>) {
         let video = Video::new(url).await;
         tx.send(video).unwrap();
     }
@@ -75,11 +67,12 @@ impl Video {
 
 async fn download_video(video: Video) {
     // Create a video file
-    let file_name = format!("./downloads/{}.ts", video.title);
+    let file_name = format!("./{}.ts", video.title);
     let mut file = File::create(file_name).unwrap();
 
     let client = reqwest::Client::new();
 
+    println!("Downloading video: {}", video.title);
     for part in 1..=video.parts {
         // Add the part number placement
         let link = video.get_part_download_link(part);
@@ -102,38 +95,35 @@ async fn download_video(video: Video) {
                 break;
             }
         }
-        println!("Downloading {}: {:.2}%", part, part as f64 / video.parts as f64);
+        // println!("Downloading {}: {:.2}%", part, part as f64 / video.parts as f64);
     }
+    println!("Finished downloading video: {}.", video.title);
 }
 
 #[tokio::main]
 async fn main() {
-    
     let (tx, rx) = mpsc::channel();
     let max_work_async: usize = 3;
 
     let video_queue = Queue::new();
-    video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-01/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-02/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-03/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-04/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-05/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-06/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-07/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-08/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-09/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-10/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-11/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-12/");
-    /video_queue.add_work("https://arquivos.rtp.pt/conteudos/o-processo-dos-tavoras-episodio-13/");
 
+    // Get the cmd args as links to download
+    let links: Vec<String> = std::env::args().collect();
+    if links.len() == 1 {
+        panic!("No links were given.");
+    }
+    
+    for link in links[1..].iter() {
+        video_queue.add_work(link).unwrap();
+    }
+    
     while video_queue.length().unwrap() > 0 {
         let mut current_work = 0;
         let mut tasks = Vec::new();
         while current_work < max_work_async {
             if let Some(link) = video_queue.get_work() {
                 let tx_clone = tx.clone();
-                let task = tokio::spawn(Video::fetch_video_info(link, tx_clone));
+                let task = tokio::spawn(Video::fetch_video_info(link.clone(), tx_clone));
                 tasks.push(task);
                 current_work += 1;
             } else {
@@ -145,8 +135,6 @@ async fn main() {
         for task in tasks {
             task.await.unwrap();
         }
-
-        current_work = 0;
     }
     
     // Drop tx as it is no longer needed
@@ -162,6 +150,7 @@ async fn main() {
     while download_queue.length().unwrap() > 0 {
         let mut current_work = 0;
         let mut tasks = Vec::new();
+        
         while current_work < max_work_async {
             if let Some(video) = download_queue.get_work() {
                 let task = tokio::spawn(download_video(video));
@@ -176,7 +165,5 @@ async fn main() {
         for task in tasks {
             task.await.unwrap();
         }
-        current_work = 0;
     }
-
 }
