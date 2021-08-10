@@ -6,7 +6,7 @@ Arquivos](https://arquivos.rtp.pt/).
 A program to download videos from [RTP Arquivos](https://arquivos.rtp.pt/).
 
 <!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-refresh-toc -->
-**Table of Contents**
+## Table of Contents
 
 - [Arquivos RTP downloader](#arquivos-rtp-downloader)
     - [PT](#pt)
