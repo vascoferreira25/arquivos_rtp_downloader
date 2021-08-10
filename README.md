@@ -1,6 +1,6 @@
 # Arquivos RTP downloader
 
-[![Rust](https://github.com/vascoferreira25/arquivos_rtp_downloader/actions/workflows/master.yml/badge.svg)](https://github.com/vascoferreira25/arquivos_rtp_downloader/actions/workflows/master.yml)
+[![Rust](https://github.com/vascoferreira25/arquivos_rtp_downloader/actions/workflows/release.yml/badge.svg)](https://github.com/vascoferreira25/arquivos_rtp_downloader/actions/workflows/release.yml)
 
 Um programa para fazer download de videos do [RTP Arquivos](https://arquivos.rtp.pt/).
 
