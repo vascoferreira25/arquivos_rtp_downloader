@@ -23,6 +23,21 @@ A program to download videos from [RTP Arquivos](https://arquivos.rtp.pt/).
 
 Instruções em Português.
 
+Este programa tem 2 versões, uma com uma interface gráfica e outra para ser
+executada na consola.
+
+A interface gráfica é a seguinte:
+
+![Dark Theme](./examples/dark_theme.png)
+
+![Light Theme](./examples/light_theme.png)
+
+Basta copiar os links do site dos Arquivos RTP, inserir na caixa de texto e
+adicionar.  Quando estiveram todos os links pretendidos, clicar em
+`Download`. O programa irá fazer o download dos videos para a mesma pasta do
+executável. Durante o download o programa fica irresponsivo até terminar. Se
+algum dos links for inválido e programa irá fechar.
+
 ### Como dar build
 
 Para criar o executavel é necessário ter a linguagem Rust instalada e executar:
@@ -50,6 +65,21 @@ Os videos vão para a pasta de onde o código for executado e terão o formato
 ## EN
 
 Instructions in English.
+
+This program has 2 versions, one with a graphical user interface and another to
+be executed through the command line.
+
+The interface looks like this:
+
+![Dark Theme](./examples/dark_theme.png)
+
+![Light Theme](./examples/light_theme.png)
+
+You just need to copy the links from Arquivos RTP, paste it into the text box
+and add the link. After all the links are inserted, click on `Download`. The
+program will download all the videos into the folder of the executable. During
+the download the program stays irresponsive. If one of the links is invalid,
+the program will crash.
 
 ### How to build
 
