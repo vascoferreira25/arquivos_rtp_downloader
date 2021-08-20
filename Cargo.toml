@@ -10,7 +10,18 @@ edition = "2018"
 reqwest = "0.11.1"
 tokio = {version = "1.2.0", features = ["full"]}
 regex = "1.4.3"
+glium = "0.30.1"
+egui = "0.13.1"
+egui_glium = "0.13.1"
+
+[lib]
+name = "mylib"
+path = "src/lib/lib.rs"
 
 [[bin]]
 name = "artp-dl"
-path = "src/main.rs"
+path = "src/cmd/main.rs"
+
+[[bin]]
+name = "artp-dl-gui"
+path = "src/gui/main.rs"
