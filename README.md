@@ -23,8 +23,8 @@ A program to download videos from [RTP Arquivos](https://arquivos.rtp.pt/).
 
 Instruções em Português.
 
-Este programa tem 2 versões, uma com uma interface gráfica e outra para ser
-executada na consola.
+Este programa tem 2 versões, uma com uma interface gráfica (`artp-dl-gui.exe`) e outra para ser
+executada na consola (`artp-dl.exe`).
 
 A interface gráfica é a seguinte:
 
@@ -66,8 +66,8 @@ Os videos vão para a pasta de onde o código for executado e terão o formato
 
 Instructions in English.
 
-This program has 2 versions, one with a graphical user interface and another to
-be executed through the command line.
+This program has 2 versions, one with a graphical user interface (`artp-dl-gui.exe`) and another to
+be executed through the command line (`artp-dl.exe`).
 
 The interface looks like this:
 
