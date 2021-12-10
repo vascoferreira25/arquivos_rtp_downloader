@@ -89,6 +89,20 @@ To build this project, you need Rust installed and run:
 cargo build --release
 ```
 
+### How to build for multiple platforms
+
+Install the target rust toolchain with:
+
+```
+rustup target add x86_64-apple-darwin
+```
+
+and then:
+
+```
+cargo build --release --target x86_64-apple-darwin
+```
+
 ### How to run
 
 The executable is called `artp-dl`. And to download videos you just have to
