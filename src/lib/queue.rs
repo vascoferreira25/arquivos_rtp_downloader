@@ -5,13 +5,13 @@ use std::collections::VecDeque;
 ///
 /// # Example
 ///
-/// ```
+/// ```ignore
 /// let max_work_async: usize = 3;
 /// 
 /// // Check if there is work to be done
 /// while queue_clone.length().unwrap() > 0 {
 ///     let mut tasks = Vec::new();
-///     let mut current_work: i32 = 0;
+///     let mut current_work: usize = 0;
 ///
 ///     // Don't overwork your PC. Set a maximum number of tasks async
 ///     while current_work < max_work_async {
