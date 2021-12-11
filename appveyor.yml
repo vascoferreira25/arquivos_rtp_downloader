@@ -58,10 +58,6 @@ test_script:
       cargo test --bin artp-dl --target %TARGET% --release &&
       cargo test --bin artp-dl-gui --target %TARGET% &&
       cargo test --bin artp-dl-gui --target %TARGET% --release &&
-      # cargo run --bin artp-dl --target %TARGET% &&
-      # cargo run --bin artp-dl --target %TARGET% --release
-      # cargo run --bin artp-dl-gui --target %TARGET% &&
-      # cargo run --bin artp-dl-gui --target %TARGET% --release
     )
 
 before_deploy:
