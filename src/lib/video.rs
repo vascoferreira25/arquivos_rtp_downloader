@@ -26,7 +26,17 @@ impl Video {
         let index = video_info["video_index"].to_string();
         let id = video_info["video_id"].to_string();
         let title = video_info["video_title"].to_string();
-        let title = title.replace("&#8211;", "-");
+        let title = title
+                        .replace("&#8211;", "-")
+                        .replace("<", "")
+                        .replace(">", "")
+                        .replace(":", "")
+                        .replace("\"", "")
+                        .replace("/", "")
+                        .replace("\\", "")
+                        .replace("|", "")
+                        .replace("?", "")
+                        .replace("*", "");
         
         let link = video_info["video_link"].to_string();
         let format = video_info["video_format"].to_string();
