@@ -1,5 +1,11 @@
 # Arquivos RTP downloader
 
+[PT] Os Arquivos RTP alteraram a forma como disponibilizam o conteúdo e agora todos os videos têm proteção DRM que faz com que os videos fiquem corrumpidos. Para além disso, ao alteraram a forma do Streaming do video, fez com que o programa já não funcione. Até arranjar uma forma alternativa, irei arquivar este projeto.
+
+[EN] Arquivos RTP changed the way they provide all the content and now, all the videos have DRM protection making any download corrupted. More so, they changed the way they stream videos and the program won't work anymore. I will archive this project until I find a way to make it work.
+
+---
+
 [![Rust](https://github.com/vascoferreira25/arquivos_rtp_downloader/actions/workflows/release.yml/badge.svg)](https://github.com/vascoferreira25/arquivos_rtp_downloader/actions/workflows/release.yml)
 
 Um programa para fazer download de videos do [RTP Arquivos](https://arquivos.rtp.pt/).
